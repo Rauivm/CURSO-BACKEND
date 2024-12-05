@@ -1,5 +1,8 @@
 const path = require('node:path')
 const fs = require('node:fs')
+const dotenv = require('dotenv')
+dotenv.config()
+console.log(process.env.NODE_ENV)
 
 const filePath = path.join(process.cwd(),'aula 01','texto.txt')
 const fileOutPath = path.join(process.cwd(), 'aula 01','texto-com-linhas.txt')
@@ -22,8 +25,8 @@ fs.readFile(filePath, {}, (erro,dados)=>{
     fs.writeFile(fileOutPath, linhasAjustadas.join('\n'), {}, (erro)=>{
         if(erro){
             console.error(`Erro na escrita do arquivo no caminho ${fileOutPath}`)
-            return
         }
-    console.timeEnd('manipular arquivo')
+        console.log(`Arquivo salvo no bucket ${process.env.S3_BUCKET}`)
+        console.timeEnd('manipular arquivo')
     })
 })
